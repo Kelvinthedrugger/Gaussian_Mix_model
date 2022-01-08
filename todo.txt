@@ -1,0 +1,21 @@
+
+project itself:
+
+    run.sh: buggy, whether it's compiled, tho it should'n affect the result if you recomile the file everytime
+            update: done
+
+    params should be changed manually in poolornot.c file
+
+
+// not working, since this git repo is init by professor
+// stop wasting the time
+account setting:
+1. add this git repo remotely to my github
+
+2. figure out how to do 2 git acc & 1 github acc
+
+3. set user name on wsl2 (here): done
+
+4. push the repo so that i don't have to worry about file loss
+
+5. should probably mv results.txt into the git repo since it's probably the most important thing

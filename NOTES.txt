@@ -1,0 +1,11 @@
+
+./run.sh works, don't forget to change the params and do the record each time
+
+installation is easy on linux
+
+the 0th result is at ~/mnt/c/Users/Kelvin/source/repos/GaussianPoolOrNot/result.txt
+
+record the results everytime outside wsl2 system since mine is not so stable
+
+working on connect with github account later: failed, since it's fetched from professor's repo, which is not mine
+
