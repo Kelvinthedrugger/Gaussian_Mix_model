@@ -1,21 +1,29 @@
 
 project itself:
 
-    run.sh: buggy, whether it's compiled, tho it should'n affect the result if you recomile the file everytime
-            update: done
+  run.sh: buggy, whether it's compiled, tho it should'n affect the result if you recomile the file everytime
+          update: done
 
-    params should be changed manually in poolornot.c file
+  params should be changed manually in poolornot.c file
+
+  
+  model inference: p.35 in textbook
+
+  consider 2 models only, 
+    P[s|F] = P[s|F, H0]P[H0] + P[s|F, H1]P[H1]
+
+  which,
+    P[H0|s, F] = P[s|F, H0] * P[H0] / P[s|F]
+
+    P[H1|s, F] = P[s|F, H1] * P[H1] / P[s|F]
+  
+    s: sequence (aka result, e.g. head,head, tail) 
+    F: count, e.g. Fhead = 2
+    Hi, model i, e.g H0: model 0
+
+  using ratio of posterior, we're able to observe which model is more likely to generate observed the data
 
 
-// not working, since this git repo is init by professor
-// stop wasting the time
-account setting:
-1. add this git repo remotely to my github
+project is available on github.com/Kelvinthedrugger, consider adding citation marks ?
 
-2. figure out how to do 2 git acc & 1 github acc
 
-3. set user name on wsl2 (here): done
-
-4. push the repo so that i don't have to worry about file loss
-
-5. should probably mv results.txt into the git repo since it's probably the most important thing
