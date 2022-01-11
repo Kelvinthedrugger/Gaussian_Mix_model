@@ -98,6 +98,7 @@ double cdfInv_JBeta[CDF_JBETA_N];  const double cdf_JBeta_n= CDF_JBETA_N;
 
 void cdfInv_precompute(){
   double x;
+  // Since Normal range is unbounded, precompute cdfInv for vals:  1/(n+1) .. n/(n+1) (weird font ver.: ¹⁄₍ₙ₊₁₎...ⁿ⁄₍ₙ₊₁₎)
   for(  uint i= 0; i < cdf_Gauss_n; ++i  ){
     x= (i+1) / (double) (1+cdf_Gauss_n);
     cdfInv_Gauss[i]=  gsl_cdf_gaussian_Pinv( x, mu_prior_params.sigma );
@@ -109,7 +110,7 @@ void cdfInv_precompute(){
     //printf( "cdfInv_Gamma[%u]= %g\n", i, cdfInv_gamma[i] );
   }
   for(  uint i= 0; i < cdf_JBeta_n; ++i  ){
-    // tricks on symmetric, p <= 0.5
+    // By symmetry, only need Beta values for p ≦ 0.5.  For example p=0.8, is the same p=0.2 with Gauss components swapped.
     x= 0.5 * i / (double) (cdf_JBeta_n);
     cdfInv_JBeta[i]=  gsl_cdf_beta_Pinv( x, 0.5, 0.5 );
     //printf( "cdfInv_JBeta[%u]= %g\n", i, cdfInv_JBeta[i] );
