@@ -24,6 +24,5 @@ project itself:
   using ratio of posterior, we're able to observe which model is more likely to generate observed the data
 
 
-project is available on github.com/Kelvinthedrugger, consider adding citation marks ?
-
+project is available on github.com/Kelvinthedrugger
 
