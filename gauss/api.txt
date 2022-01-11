@@ -55,29 +55,7 @@ const double cdf_gamma_n= CDF_GAMMA_N;
 double cdfInv_JBeta[CDF_JBETA_N];
 const double cdf_JBeta_n= CDF_JBETA_N;
 
-void cdfInv_precompute(){
-  double x;
-  // Since Normal range is unbounded, precompute cdfInv for vals 
-  // vals:  1/(n+1) .. n/(n+1)
-  for(uint i= 0; i < cdf_Gauss_n; ++i  ){
-    x= (i+1) / (double) (1+cdf_Gauss_n);
-    cdfInv_Gauss[i]=  
-        gsl_cdf_gaussian_Pinv( x, mu_prior_params.sigma );
-  }
-  for(uint i= 0; i < cdf_gamma_n; ++i  ){
-    x= i / (double) (cdf_gamma_n);
-    cdfInv_gamma[i]=  sigma_prior_minval 
- + gsl_cdf_gamma_Pinv( x, sigma_prior_param_a, sigma_prior_param_b );
-  
-  }
-  for(  uint i= 0; i < cdf_JBeta_n; ++i  ){
-    // By symmetry, only need Beta values for p ≦ 0.5.
-    // For example p=0.8, is the same p=0.2 with 
-    // Gauss components swapped.
-    x= 0.5 * i / (double) (cdf_JBeta_n);
-    cdfInv_JBeta[i]=  gsl_cdf_beta_Pinv( x, 0.5, 0.5 );
-  }
-}
+void cdfInv_precompute()
 
 
 void data_generate_1component( Gauss_params params ): 

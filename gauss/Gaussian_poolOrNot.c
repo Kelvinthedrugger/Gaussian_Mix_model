@@ -17,13 +17,13 @@
 #define CDF_GAMMA_N 10
 #define CDF_JBETA_N 40
 
+#include<stdlib.h>// for qsort(), malloc() not used yet
+
 typedef struct{
   double mixCof;
   Gauss_params Gauss1;
   Gauss_params Gauss2;
 } Gauss_mixture_params;
-
-
 /*
 typedef struct{
   double mu;
@@ -53,7 +53,6 @@ void println(){  printf( "\n" );  }
 Gauss_params data_sample(){
   // if overflow: use malloc() in stdlib
   Gauss_params sam;
-
   double mean= 0.0;
   for( int i= 0;  i < dataN;  ++i ){
     mean += data[i];
@@ -68,7 +67,7 @@ Gauss_params data_sample(){
   return sam;
 }
 
-void data_print(){
+void data_print(){// data[dataN] 
   qsort(  data,  dataN,  sizeof(double), CMPup  );
   for( int i= 0;  i < dataN;  ++i ){
     printf( "%d %+5.3f ", i, data[i] );
@@ -226,7 +225,6 @@ int main( int argc, char *argv[] ){
   int model1_summing__favors1=  0;
   int model2_sampling_favors1=  0;
   int model2_summing__favors1=  0;
-
 
   printf( "\nData generated with one component\n" );
   for(  int iter= 0;  iter < datasets_n;  ++iter  ){
