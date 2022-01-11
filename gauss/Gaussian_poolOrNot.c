@@ -36,7 +36,8 @@ const Gauss_params mu_prior_params= {0.0, 4.0};
 const double sigma_prior_param_a= 0.5;
 const double sigma_prior_param_b= 2.0;
 const double sigma_prior_minval= 0.01;
-
+// for Gauss_params prior_Gauss_params_sample() & mixture_sample()
+// ,which utilizes conjugate prior
 
 double data[DATA_N];
 const int dataN= DATA_N;
@@ -51,23 +52,22 @@ int CMPup( const void *arg1, const void *arg2 ){
 void println(){  printf( "\n" );  }
 
 Gauss_params data_sample(){
-  // if overflow: use malloc() in stdlib
+  // if overflow: use malloc()
   Gauss_params sam;
-  double mean= 0.0;
+  sam.mu = 0.0;
   for( int i= 0;  i < dataN;  ++i ){
-    mean += data[i];
+    sam.mu += data[i];
   }
-  double var= 0.0;
+  sam.sigma = 0.0;
+  double diff; 
   for( int i= 0;  i < dataN;  ++i ){
-    double diff=  data[i] - mean;
-    var +=  diff * diff;
+    sam.sigma +=  diff * diff;
   }
-  sam.mu = mean;
-  sam.sigma = var;
   return sam;
 }
 
-void data_print(){// data[dataN] 
+void data_print(){
+// double data[dataN] 
   qsort(  data,  dataN,  sizeof(double), CMPup  );
   for( int i= 0;  i < dataN;  ++i ){
     printf( "%d %+5.3f ", i, data[i] );
@@ -81,6 +81,7 @@ Gauss_params prior_Gauss_params_sample(){
   params.sigma=  sigma_prior_minval + GSLfun_ran_gamma( sigma_prior_param_a, sigma_prior_param_b );
   return  params;
 }
+
 Gauss_mixture_params prior_Gauss_mixture_params_sample(){
   Gauss_mixture_params params;
   params.mixCof=  GSLfun_ran_beta_Jeffreys();
@@ -89,9 +90,11 @@ Gauss_mixture_params prior_Gauss_mixture_params_sample(){
   return  params;
 }
 
-
+// 40
 double cdfInv_Gauss[CDF_GAUSS_N];  const double cdf_Gauss_n= CDF_GAUSS_N;
+// 10
 double cdfInv_gamma[CDF_GAMMA_N];  const double cdf_gamma_n= CDF_GAMMA_N;
+// 40
 double cdfInv_JBeta[CDF_JBETA_N];  const double cdf_JBeta_n= CDF_JBETA_N;
 
 void cdfInv_precompute(){
