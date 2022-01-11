@@ -30,6 +30,7 @@ double GSLfun_ran_gamma( double a, double theta ){
   return  gsl_ran_gamma( gslRNG, a, theta );
 }
 
+// frequently used
 double GSLfun_ran_gaussian( Gauss_params params ){
   return  params.mu + gsl_ran_gaussian( gslRNG, params.sigma );
 }

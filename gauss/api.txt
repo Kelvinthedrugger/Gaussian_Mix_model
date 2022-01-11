@@ -1,0 +1,176 @@
+#define DATA_N 40
+#define CDF_GAUSS_N 20
+#define CDF_GAMMA_N 10
+#define CDF_JBETA_N 40
+
+typedef struct{
+  double mixCof;
+  Gauss_params Gauss1;
+  Gauss_params Gauss2;
+} Gauss_mixture_params;
+
+// defined in GSLfun.h
+Gauss params: 
+  mu (mean)
+  sigma (standard deviation)
+
+// change here for different result ?
+const Gauss_params mu_prior_params= {0.0, 4.0};
+const double sigma_prior_param_a= 0.5;
+const double sigma_prior_param_b= 2.0;
+const double sigma_prior_minval= 0.01;
+
+
+double data[DATA_N];
+const uint dataN= DATA_N;
+                
+const uint sampleRepeatNum= 2000000;
+
+double data_sample_mean(): mean of data[i]
+double data_sample_variance(): variance of data[i]
+void data_print()
+
+
+Gauss_params prior_Gauss_params_sample(){
+  Gauss_params params;
+  params.mu=   GSLfun_ran_gaussian( mu_prior_params );
+  params.sigma=  sigma_prior_minval + GSLfun_ran_gamma( sigma_prior_param_a, sigma_prior_param_b );
+  return  params;
+}
+
+
+Gauss_mixture_params prior_Gauss_mixture_params_sample(){
+  Gauss_mixture_params params;
+  params.mixCof=  GSLfun_ran_beta_Jeffreys();
+  params.Gauss1=  prior_Gauss_params_sample();
+  params.Gauss2=  prior_Gauss_params_sample();
+  return  params;
+}
+
+
+double cdfInv_Gauss[CDF_GAUSS_N];  
+const double cdf_Gauss_n= CDF_GAUSS_N;
+double cdfInv_gamma[CDF_GAMMA_N]; 
+const double cdf_gamma_n= CDF_GAMMA_N;
+double cdfInv_JBeta[CDF_JBETA_N];
+const double cdf_JBeta_n= CDF_JBETA_N;
+
+void cdfInv_precompute(){
+  double x;
+  // Since Normal range is unbounded, precompute cdfInv for vals 
+  // vals:  1/(n+1) .. n/(n+1)
+  for(uint i= 0; i < cdf_Gauss_n; ++i  ){
+    x= (i+1) / (double) (1+cdf_Gauss_n);
+    cdfInv_Gauss[i]=  
+        gsl_cdf_gaussian_Pinv( x, mu_prior_params.sigma );
+  }
+  for(uint i= 0; i < cdf_gamma_n; ++i  ){
+    x= i / (double) (cdf_gamma_n);
+    cdfInv_gamma[i]=  sigma_prior_minval 
+ + gsl_cdf_gamma_Pinv( x, sigma_prior_param_a, sigma_prior_param_b );
+  
+  }
+  for(  uint i= 0; i < cdf_JBeta_n; ++i  ){
+    // By symmetry, only need Beta values for p ≦ 0.5.
+    // For example p=0.8, is the same p=0.2 with 
+    // Gauss components swapped.
+    x= 0.5 * i / (double) (cdf_JBeta_n);
+    cdfInv_JBeta[i]=  gsl_cdf_beta_Pinv( x, 0.5, 0.5 );
+  }
+}
+
+
+void data_generate_1component( Gauss_params params ): 
+  fill data[i] using Gaussian, i from 1 to n
+
+void data_generate_2component( Gauss_mixture_params params ){
+  for( uint i= 0; i < dataN; ++i ){
+    data[i]=  GSLfun_ran_gaussian
+       // what is gsl_ran_flat?
+      (gsl_ran_flat01() < params.mixCof?  params.Gauss1  : params.Gauss2);
+  }
+}
+
+double data_prob_1component_bySumming(){
+  double prob_total= 0.0;
+  for(  uint m= 0;  m < cdf_Gauss_n;  ++m  ){
+    double mu= cdfInv_Gauss[m];
+    for(  uint s= 0;  s < cdf_gamma_n;  ++s  ){
+      double sigma= cdfInv_gamma[s];
+      Gauss_params cur_params= {mu, sigma};
+      double curProb= 1.0;
+      for(  uint d= 0;  d < dataN;  ++d  ){
+        double newProb= GSLfun_ran_gaussian_pdf( data[d], cur_params );
+        curProb *= newProb;
+      }
+      prob_total += curProb;
+    }
+  }
+  return  prob_total / (double) (cdf_Gauss_n * cdf_gamma_n);
+}
+
+
+double data_prob_2component_bySumming(){
+  double prob_total= 0.0;
+
+  for(  uint m1= 0;  m1 < cdf_Gauss_n;  ++m1  ){
+    double mu1= cdfInv_Gauss[m1];
+    for(  uint m2= 0;  m2 < cdf_Gauss_n;  ++m2  ){
+      double mu2= cdfInv_Gauss[m2];
+      for(  uint s1= 0;  s1 < cdf_gamma_n;  ++s1  ){
+        double sigma1= cdfInv_gamma[s1];
+        Gauss_params cur_params1= {mu1, sigma1};
+        for(  uint s2= 0;  s2 < cdf_gamma_n;  ++s2  ){
+          double sigma2= cdfInv_gamma[s2];
+          Gauss_params cur_params2= {mu2, sigma2};
+          for(  uint mi= 0;  mi < cdf_JBeta_n;  ++mi  ){
+            double mixCof= cdfInv_JBeta[mi];
+            double curProb= 1.0;
+            for(  uint d= 0;  d < dataN;  ++d  ){
+              double newProb=  mixCof  * GSLfun_ran_gaussian_pdf( data[d], cur_params1 )
+                +           (1-mixCof) * GSLfun_ran_gaussian_pdf( data[d], cur_params2 );
+              curProb *= newProb;
+            }
+            prob_total += curProb;
+          }
+        }
+      }
+    }
+  }
+  return  prob_total / (double) (cdf_Gauss_n * cdf_Gauss_n * cdf_gamma_n * cdf_gamma_n * cdf_JBeta_n);
+}
+ 
+ 
+double data_prob_1component_bySampling(){
+  double curProb, prob_total= 0.0;
+
+  for( uint iter= 0;  iter < sampleRepeatNum; ++iter ){
+    Gauss_params params= prior_Gauss_params_sample();
+    curProb= 1.0;
+    for(  uint d= 0;  d < dataN;  ++d ){
+      curProb *= GSLfun_ran_gaussian_pdf( data[d], params );
+    }
+    prob_total += curProb;
+  }
+  return  prob_total / (double) sampleRepeatNum;
+}
+
+
+double data_prob_2component_bySampling(){
+  double curProb, prob_total= 0.0;
+
+  for( uint iter= 0;  iter < sampleRepeatNum; ++iter ){
+    Gauss_mixture_params params=  prior_Gauss_mixture_params_sample();
+    curProb= 1.0;
+    for( uint i= 0; i < dataN; ++i ){
+      double newProb=
+        (1-params.mixCof) * GSLfun_ran_gaussian_pdf( data[i], params.Gauss2 )
+        +  params.mixCof  * GSLfun_ran_gaussian_pdf( data[i], params.Gauss1 );
+      curProb *= newProb;
+    }
+    prob_total += curProb;
+  }
+  return  prob_total / (double) sampleRepeatNum;
+}
+
+ 
