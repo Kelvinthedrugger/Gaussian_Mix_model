@@ -44,33 +44,29 @@ const int sampleRepeatNum= 2000000;
 
 
 int CMPup( const void *arg1, const void *arg2 ){
-  return(    (*(double*) arg1 < *(double*) arg2)? -1 :
-             (*(double*) arg2 < *(double*) arg1)? +1 :
-             0);
+  return((*(double*) arg1 < *(double*) arg2)? -1 :(*(double*) arg2 < *(double*) arg1)? +1 :0);
 }
 
 
 void println(){  printf( "\n" );  }
 
-double data_sample_mean(){
+Gauss_params data_sample(){
+  // if overflow: use malloc() in stdlib
+  Gauss_params sam;
+
   double mean= 0.0;
   for( int i= 0;  i < dataN;  ++i ){
     mean += data[i];
   }
-  return  mean / (double) dataN;
-}
-
-double data_sample_variance(){
-  double mean= data_sample_mean();
   double var= 0.0;
   for( int i= 0;  i < dataN;  ++i ){
     double diff=  data[i] - mean;
     var +=  diff * diff;
   }
-  // frequencist ? 
-  return  var / (double) (dataN-1);
+  sam.mu = mean;
+  sam.sigma = var;
+  return sam;
 }
-
 
 void data_print(){
   qsort(  data,  dataN,  sizeof(double), CMPup  );
@@ -80,15 +76,12 @@ void data_print(){
 }
 
 
-
 Gauss_params prior_Gauss_params_sample(){
   Gauss_params params;
   params.mu=   GSLfun_ran_gaussian( mu_prior_params );
   params.sigma=  sigma_prior_minval + GSLfun_ran_gamma( sigma_prior_param_a, sigma_prior_param_b );
   return  params;
 }
-
-
 Gauss_mixture_params prior_Gauss_mixture_params_sample(){
   Gauss_mixture_params params;
   params.mixCof=  GSLfun_ran_beta_Jeffreys();
@@ -158,7 +151,6 @@ double data_prob_1component_bySumming(){
 
 double data_prob_2component_bySumming(){
   double prob_total= 0.0;
-
   for(  int m1= 0;  m1 < cdf_Gauss_n;  ++m1  ){
     double mu1= cdfInv_Gauss[m1];
     for(  int m2= 0;  m2 < cdf_Gauss_n;  ++m2  ){
@@ -202,8 +194,6 @@ double data_prob_1component_bySampling(){
   }
   return  prob_total / (double) sampleRepeatNum;
 }
-
-
 double data_prob_2component_bySampling(){
   double curProb, prob_total= 0.0;
 
