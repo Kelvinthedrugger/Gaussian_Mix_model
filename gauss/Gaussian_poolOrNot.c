@@ -32,12 +32,28 @@ typedef struct{
 */
 
 // change here for different result ?
+// for Gauss_params prior_Gauss_params_sample() & mixture_sample()
+// ,which utilizes conjugate prior
+// default
+/*
 const Gauss_params mu_prior_params= {0.0, 4.0};
 const double sigma_prior_param_a= 0.5;
 const double sigma_prior_param_b= 2.0;
+const double sigma_prior_minval= 0.01;*/
+// a == k, b == theta
+// Notice that a: shape, b: scale
+// task 2
+/*
+const Gauss_params mu_prior_params= {0.0, 2.0};
+const double sigma_prior_param_a= 2.0;
+const double sigma_prior_param_b= 2.0;
+const double sigma_prior_minval= 0.01;*/
+// task 3
+const Gauss_params mu_prior_params= {0.0, 4.0};
+const double sigma_prior_param_a= 8.0;
+const double sigma_prior_param_b= 0.5;
 const double sigma_prior_minval= 0.01;
-// for Gauss_params prior_Gauss_params_sample() & mixture_sample()
-// ,which utilizes conjugate prior
+
 
 double data[DATA_N];
 const int dataN= DATA_N;
@@ -124,6 +140,7 @@ void data_generate_1component( Gauss_params params ){
   }
 }
 
+// flat: uniform distribution
 void data_generate_2component( Gauss_mixture_params params ){
   for( int i= 0; i < dataN; ++i ){
     data[i]=  GSLfun_ran_gaussian

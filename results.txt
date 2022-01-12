@@ -305,3 +305,149 @@ By summing:  Model1 data, correct selection 6/10
              Model2 data, correct selection 7/10
 
 
+5th
+1/12/22
+GSL_RNG_SEED=1337
+
+Data generated with one component
+generating data with: (μ,σ) = (0.83,2.60)
+Integrals by sampling= (9.26544e-46,7.79042e-46)  by summing: (9.77867e-46,8.32554e-46)
+
+generating data with: (μ,σ) = (2.66,1.90)
+Integrals by sampling= (1.77602e-34,6.8021e-35)  by summing: (1.34077e-34,5.01989e-35)
+
+generating data with: (μ,σ) = (0.86,1.93)
+Integrals by sampling= (1.4879e-36,8.36643e-37)  by summing: (1.86994e-36,9.74051e-37)
+
+generating data with: (μ,σ) = (-4.89,6.41)
+Integrals by sampling= (1.56454e-59,9.84675e-60)  by summing: (1.13119e-60,5.30557e-61)
+
+generating data with: (μ,σ) = (-0.22,6.63)
+Integrals by sampling= (1.80912e-57,1.45087e-57)  by summing: (1.9121e-57,1.48873e-57)
+
+generating data with: (μ,σ) = (2.58,9.50)
+Integrals by sampling= (1.79512e-64,1.01079e-64)  by summing: (1.55309e-64,7.02878e-65)
+
+generating data with: (μ,σ) = (0.42,4.56)
+Integrals by sampling= (4.29986e-53,5.27001e-53)  by summing: (4.52237e-53,5.3567e-53)
+
+generating data with: (μ,σ) = (-1.45,3.16)
+Integrals by sampling= (6.33252e-46,4.90918e-46)  by summing: (6.67581e-46,5.42284e-46)
+
+generating data with: (μ,σ) = (-4.58,1.77)
+Integrals by sampling= (5.41482e-39,1.92786e-39)  by summing: (8.87732e-42,2.35688e-42)
+
+generating data with: (μ,σ) = (-0.96,6.60)
+Integrals by sampling= (6.89777e-57,5.56333e-57)  by summing: (7.22488e-57,5.41813e-57)
+
+
+Data generated with two components
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.068; (-1.02,3.08); (-1.04,2.79)
+Integrals by sampling= (2.17745e-41,1.73589e-41)  by summing: (2.38836e-41,1.87609e-41)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.995; (-2.96,1.54); (3.51,3.23)
+Integrals by sampling= (9.61987e-34,4.15803e-34)  by summing: (6.49949e-34,3.64683e-34)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.081; (2.84,4.03); (-3.58,9.85)
+Integrals by sampling= (2.54834e-67,2.06165e-67)  by summing: (1.83936e-68,9.47453e-69)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.026; (1.56,9.46); (-2.12,0.78)
+Integrals by sampling= (1.43955e-25,1.20946e-24)  by summing: (9.98407e-26,3.94854e-26)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.132; (-1.10,1.21); (0.44,3.77)
+Integrals by sampling= (2.65566e-49,4.56966e-49)  by summing: (2.78384e-49,4.77443e-49)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.004; (-1.09,4.60); (1.60,3.45)
+Integrals by sampling= (4.3965e-51,3.22621e-51)  by summing: (4.62622e-51,3.25965e-51)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.617; (0.74,1.45); (1.70,1.53)
+Integrals by sampling= (8.94571e-35,5.01609e-35)  by summing: (9.91034e-35,5.27303e-35)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.969; (-2.67,3.69); (0.02,1.71)
+Integrals by sampling= (7.00853e-49,6.24221e-49)  by summing: (7.38555e-49,6.48443e-49)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.923; (1.50,13.33); (2.74,4.59)
+Integrals by sampling= (6.86025e-72,4.19362e-72)  by summing: (5.7852e-78,3.28565e-78)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.032; (1.57,3.29); (2.41,1.29)
+Integrals by sampling= (7.03734e-33,4.69646e-33)  by summing: (3.91802e-33,2.81211e-33)
+
+By sampling: Model1 data, correct selection 9/10
+             Model2 data, correct selection 2/10
+By summing:  Model1 data, correct selection 9/10
+             Model2 data, correct selection 1/10
+
+
+6th
+
+GSL_RNG_SEED=1337
+
+Data generated with one component
+generating data with: (μ,σ) = (1.66,3.43)
+Integrals by sampling= (2.16696e-50,2.12687e-50)  by summing: (2.27965e-50,2.22939e-50)
+
+generating data with: (μ,σ) = (-3.81,3.03)
+Integrals by sampling= (1.32658e-46,2.58268e-46)  by summing: (1.38825e-46,2.63563e-46)
+
+generating data with: (μ,σ) = (1.56,4.76)
+Integrals by sampling= (1.81266e-56,2.02474e-56)  by summing: (1.8944e-56,1.99807e-56)
+
+generating data with: (μ,σ) = (-0.54,3.32)
+Integrals by sampling= (1.0959e-46,9.72157e-47)  by summing: (1.14707e-46,9.90848e-47)
+
+generating data with: (μ,σ) = (3.98,3.16)
+Integrals by sampling= (1.83887e-47,1.18364e-47)  by summing: (1.94207e-47,1.23579e-47)
+
+generating data with: (μ,σ) = (-0.67,2.17)
+Integrals by sampling= (5.97976e-40,2.33325e-40)  by summing: (4.64184e-40,1.73608e-40)
+
+generating data with: (μ,σ) = (6.47,6.90)
+Integrals by sampling= (1.88486e-62,1.77806e-62)  by summing: (2.46663e-63,4.0199e-63)
+
+generating data with: (μ,σ) = (-1.67,2.36)
+Integrals by sampling= (8.9011e-44,4.94861e-44)  by summing: (9.48592e-44,5.12482e-44)
+
+generating data with: (μ,σ) = (2.55,5.56)
+Integrals by sampling= (2.45809e-57,3.01912e-57)  by summing: (2.4977e-57,2.85926e-57)
+
+generating data with: (μ,σ) = (-4.53,1.88)
+Integrals by sampling= (1.1042e-39,3.59612e-40)  by summing: (7.39755e-40,2.3394e-40)
+
+
+Data generated with two components
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.891; (3.97,3.36); (7.12,1.96)
+Integrals by sampling= (1.07369e-49,7.43238e-50)  by summing: (1.12405e-49,7.74991e-50)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.914; (3.61,5.48); (0.83,3.46)
+Integrals by sampling= (1.73118e-57,1.8344e-57)  by summing: (1.73406e-57,1.56975e-57)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.756; (2.89,4.53); (0.93,3.27)
+Integrals by sampling= (1.18103e-54,1.60131e-54)  by summing: (1.24713e-54,1.66343e-54)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.985; (-2.99,2.94); (-3.19,5.85)
+Integrals by sampling= (4.26339e-48,3.49206e-48)  by summing: (4.48084e-48,3.45654e-48)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.347; (-0.13,5.64); (-2.87,5.82)
+Integrals by sampling= (1.36022e-59,1.43777e-59)  by summing: (9.26602e-60,9.91159e-60)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.779; (-3.72,2.43); (5.89,1.82)
+Integrals by sampling= (3.69135e-50,9.65141e-50)  by summing: (3.86819e-50,9.28474e-50)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.706; (-1.70,4.59); (0.33,3.79)
+Integrals by sampling= (7.12431e-52,7.40015e-52)  by summing: (7.46412e-52,7.67337e-52)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.244; (4.85,2.79); (6.26,3.05)
+Integrals by sampling= (1.39578e-45,5.5283e-46)  by summing: (1.13516e-45,5.1448e-46)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.066; (0.45,5.40); (1.27,5.72)
+Integrals by sampling= (9.09257e-57,1.02248e-56)  by summing: (9.39609e-57,9.90586e-57)
+
+generating data with:  m; (μ1,σ1); (μ2,σ2) = 0.923; (-1.97,4.27); (-0.50,4.72)
+Integrals by sampling= (2.34558e-54,2.86931e-54)  by summing: (2.47539e-54,2.9633e-54)
+
+By sampling: Model1 data, correct selection 7/10
+             Model2 data, correct selection 7/10
+By summing:  Model1 data, correct selection 6/10
+             Model2 data, correct selection 6/10
+
+
