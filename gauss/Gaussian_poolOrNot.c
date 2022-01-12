@@ -61,6 +61,7 @@ Gauss_params data_sample(){
   sam.sigma = 0.0;
   double diff; 
   for( int i= 0;  i < dataN;  ++i ){
+    diff = data[i] - sam.mu;
     sam.sigma +=  diff * diff;
   }
   return sam;
@@ -70,7 +71,7 @@ void data_print(){
 // double data[dataN] 
   qsort(  data,  dataN,  sizeof(double), CMPup  );
   for( int i= 0;  i < dataN;  ++i ){
-    printf( "%d %+5.3f ", i, data[i] );
+    printf( "%d %+5.3f\n", i, data[i] );
   }
 }
 
