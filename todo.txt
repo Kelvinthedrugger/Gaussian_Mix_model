@@ -23,6 +23,46 @@ project itself:
 
   using ratio of posterior, we're able to observe which model is more likely to generate observed the data
 
+  gaussian mixture model: 
+    ch 22, maximum likelihood, Page302
+    ch 3, posterior prob. ratio, 
+
+  code:
+    cdfInv_precompute():
+      do the sample of prior distri. and store in cdfInv_xx
+      , which would be used in data_prob_xx_by_Summming()
+      to produce data that would lead to posterior prob.
+
+    data_prob_xx_bySampling(): 
+      return data by running normal gaussian(s) 
+
+
+    flow: assign prior_mu, prior_sigma_params,
+       -> use these in cdfInv_precompute()
+       -> in main():
+            generate data
+            loop
+              sample data and calculate posterior prob
+              by summing and sampling
+              compare to see if success
+  
+  report:
+    put this in: 
+      It was not fully understood by me until I
+    dig into every line of the code and try to re-create 
+    the program from scratch. Especially the part that 
+    utilized conjugate prior in order to produce data in 
+    generating-data-by-summing" step, which is required 
+    before we can experimenting inference problem, 
+    is a thinker to me. 
+      Huge thanks to professor whether I got the content 
+    of this report right. Without this homework, I might
+    need 10x of work to implement inference problem in 
+    future, especially when a knowledge in details
+    is essential.
+
+    pics: draw the pics like fig3.6 & 3.8 in textbook ?  
+
 
 project is available on github.com/Kelvinthedrugger
 
